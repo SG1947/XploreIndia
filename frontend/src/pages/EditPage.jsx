@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
-
+const url=process.env.REACT_APP_server;
 export default function EditPage() {
   const {id} = useParams();
   const [title, setTitle] = useState("");
@@ -15,7 +15,7 @@ export default function EditPage() {
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:8000/post/'+id)
+    fetch(`${url}/post/`+id)
       .then(response => {
         response.json().then(postInfo => {
           setTitle(postInfo.title);
@@ -44,7 +44,7 @@ export default function EditPage() {
     if (files?.[0]) {
       data.set('file', files?.[0]);
     }
-    const response = await fetch('http://localhost:8000/post', {
+    const response = await fetch(`${url}/post`, {
       method: 'PUT',
       body: data,
       credentials: 'include',

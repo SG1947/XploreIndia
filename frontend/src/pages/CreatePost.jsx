@@ -4,7 +4,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-
+const url=process.env.REACT_APP_server;
 export default function CreatePost() {
   const [value, setValue] = React.useState(0);
   const [title, setTitle] = useState("");
@@ -31,7 +31,7 @@ export default function CreatePost() {
     data.set("travelType", travelType);
     data.set("tripHighlight", tripHighlight);
     data.set("rating",value);
-    const response = await fetch("http://localhost:8000/post", {
+    const response = await fetch(`${url}/post`, {
       method: "POST",
       body: data,
       credentials: "include",

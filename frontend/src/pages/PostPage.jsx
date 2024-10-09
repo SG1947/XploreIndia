@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Button, IconButton } from "@mui/material"; // Assuming you're using MUI for styling
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-
+const url=process.env.REACT_APP_server;
 export default function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
   const [redirect, setRedirect] = useState(false);
@@ -16,7 +16,7 @@ export default function PostPage() {
   // const [likes, setLikes] = useState(0); // State to track likes
 
   useEffect(() => {
-    fetch(`http://localhost:8000/post/${id}`)
+    fetch(`${url}/post/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch post");
@@ -39,7 +39,7 @@ export default function PostPage() {
   if (!postInfo) return ""; // Handle loading state or return an empty string
 
   async function deletePost() {
-    const response = await fetch(`http://localhost:8000/post/${id}`, {
+    const response = await fetch(`${url}/post/${id}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -53,7 +53,7 @@ export default function PostPage() {
   }
 
   async function handleLike() {
-    const response = await fetch(`http://localhost:8000/post/${id}/like`, {
+    const response = await fetch(`${url}/post/${id}/like`, {
       method: "POST",
       credentials: "include",
     });

@@ -6,10 +6,11 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
+const url=process.env.REACT_APP_server;
 export default function Header({ setSearchTerm }) {
   const {setUserInfo,userInfo} = useContext(UserContext);
   useEffect(() => {
-    fetch('http://localhost:8000/profile', {
+    fetch(`${url}/profile`, {
       credentials: 'include',
     }).then(response => {
       response.json().then(userInfo => {
@@ -26,7 +27,7 @@ export default function Header({ setSearchTerm }) {
   };
 
   function logout() {
-    fetch('http://localhost:8000/logout', {
+    fetch(`${url}/logout`, {
       credentials: 'include',
       method: 'POST',
     });

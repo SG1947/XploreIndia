@@ -6,9 +6,10 @@ export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const url=process.env.REACT_APP_server;
   async function register(ev) {
     ev.preventDefault();
-    const response = await fetch('http://localhost:8000/register', {
+    const response = await fetch(`${url}/register`, {
       method: 'POST',
       body: JSON.stringify({username,email,password}),
       headers: {'Content-Type':'application/json'},
