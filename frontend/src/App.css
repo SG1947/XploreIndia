@@ -337,7 +337,6 @@ div.post-page h1{
 }
 .main-content{
   display: flex;
-  height: 100%;
 }
 .filters{
   width: 20%;
