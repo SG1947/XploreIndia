@@ -120,7 +120,7 @@ export default function PostPage() {
 
       {userInfo.id !== postInfo.author._id && (
         
-          <div onClick={handleLike} className="like-section" >
+          <IconButton onClick={handleLike} className="like-section" >
             {postInfo.likes?.likedBy?.includes(userInfo.id) ? (
               <>
                 <FavoriteIcon style={{ color: "red" }} />
@@ -132,7 +132,7 @@ export default function PostPage() {
                 <span style={{color:"black"}}>Please like this post</span>
               </>
             )}
-          </div>
+          </IconButton>
       )}
     </div>
   );
