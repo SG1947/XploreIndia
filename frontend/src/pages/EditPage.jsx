@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
-const url=process.env.REACT_APP_server;
+const url=import.meta.env.VITE_SERVER_URL;
 export default function EditPage() {
   const {id} = useParams();
   const [title, setTitle] = useState("");

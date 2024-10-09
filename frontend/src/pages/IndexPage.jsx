@@ -51,7 +51,7 @@
 import Post from "../components/Post.jsx";
 import { useEffect, useState } from "react";
 import { useOutletContext } from 'react-router-dom';
-const url=process.env.REACT_APP_server;
+const url=import.meta.env.VITE_SERVER_URL;
 export default function IndexPage() {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);

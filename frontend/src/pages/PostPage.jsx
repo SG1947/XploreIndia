@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Button, IconButton } from "@mui/material"; // Assuming you're using MUI for styling
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-const url=process.env.REACT_APP_server;
+const url=import.meta.env.VITE_SERVER_URL;
 export default function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
   const [redirect, setRedirect] = useState(false);

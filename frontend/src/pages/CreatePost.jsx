@@ -4,7 +4,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-const url=process.env.REACT_APP_server;
+const url=import.meta.env.VITE_SERVER_URL;
 export default function CreatePost() {
   const [value, setValue] = React.useState(0);
   const [title, setTitle] = useState("");

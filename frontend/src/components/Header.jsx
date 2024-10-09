@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
-const url=process.env.REACT_APP_server;
+const url=import.meta.env.VITE_SERVER_URL;
 export default function Header({ setSearchTerm }) {
   const {setUserInfo,userInfo} = useContext(UserContext);
   useEffect(() => {

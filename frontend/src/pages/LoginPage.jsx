@@ -1,7 +1,7 @@
 import {useContext, useState} from "react";
 import {Navigate} from "react-router-dom";
 import {UserContext} from "../components/UserContext.jsx";
-const url=process.env.REACT_APP_server;
+const url=import.meta.env.VITE_SERVER_URL;
 export default function LoginPage() {
   const [username,setUsername] = useState('');
   const [password,setPassword] = useState('');
