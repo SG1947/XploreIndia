@@ -10,10 +10,11 @@ if (process.env.NODE_ENV != "production") {
 const secret = process.env.SECRET;
 
 module.exports.register = async (req, res) => {
-  const { username, password } = req.body;
+  const { username,email, password } = req.body;
   try {
     const userDoc = await User.create({
       username,
+      email,
       password: bcrypt.hashSync(password, salt),
     });
     res.json(userDoc);
