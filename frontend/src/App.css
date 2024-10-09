@@ -1,0 +1,379 @@
+
+* { 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a{
+  cursor: pointer;
+}
+html, body {
+  color: #222;
+  /* Remove height restrictions on body and html */
+}
+
+#root {
+  /* Remove height restriction */
+  min-height: 100vh; /* Ensure root takes full viewport height but can grow with content */
+}
+
+main {
+  /* Remove fixed height */
+  min-height: 100vh; /* Allow main to grow with content */
+  margin: 0 auto;
+}
+img{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 25px; 
+  padding: 1rem;
+}
+/* Header */
+
+header{
+  position: sticky;
+  top: 0;
+  display:flex;
+  padding: 0 2rem;
+  justify-content:space-between;
+  align-items: center;
+  z-index: 10;
+  background-color: rgb(213, 245, 234);
+}
+header a{
+  text-decoration:none;
+  color: inherit;
+}
+header a.logo{
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+header nav{
+  display:flex;
+  gap: 30px;
+  font-size: large;
+  font-weight: 600;
+  color: rgb(4, 63, 63);
+}
+header .menu{
+  display: none !important;
+}
+.search{
+  display: flex;
+  width:50%;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.search input{
+  margin-left: 2rem;
+  width: 60%;
+}
+.search button{
+  width: 40%;
+}
+/* Media query for screen sizes below 1100px */
+@media (max-width: 900px) {
+  header {
+    position:sticky;
+    top: 0;
+    padding:0 !important;
+    display: flex;
+    justify-content: space-between !important;
+  }
+  
+  header h2{
+    margin:0;
+  }
+  header nav {
+    gap: 12px; /* Reduced gap for smaller screens */
+    margin-top: 10px;
+    display: none;
+  }
+  header .menu{
+    display: flex !important;
+  }
+  .search {
+    align-items: center;
+  }
+
+  .search input {
+    padding-right: 1rem;
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+  .search button{
+    display: none;
+  }
+}
+/* Index */
+
+.post{
+  max-width: 50rem;
+  display:flex;
+  margin: 2rem 10rem;
+  background-color: rgb(250, 245, 226) !important;
+  border-radius: 15px !important;
+  border: 1px solid burlywood;
+}
+.post .image{
+  width: 50%;
+  margin-left: 1rem;
+}
+.post .texts{
+  width: 20rem;
+  margin-top: 1.6rem;
+  margin-left: 2rem;
+}
+.post .texts h2{
+  font-size: 1.5rem;
+}
+.post .info{
+  margin:24px 0;
+  color: #888;
+  font-size:1rem;
+  font-weight: bold;
+  display: flex;
+  gap: 10px;
+}
+.post .info .author{
+  color:#333;
+  text-decoration:none;
+}
+.post .summary{
+  margin:10px 0;
+  line-height: 1.8rem;
+}
+.post p{
+  display: flex;
+  align-items: center;
+}
+.like-icon{
+  color: red;
+  
+}
+/* @media (max-width: 800px) {
+  .post {
+    max-width: fit-content;
+  }
+
+  .post .image {
+    width: 100%;
+    height: auto;
+    margin: 0;
+  }
+
+  .post .texts {
+    max-width: fit-content;
+  }
+
+  .post .text h2 {
+    font-size: 1.8rem;
+  }
+
+  .post .info {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .post .summary {
+    margin: 1rem 0;
+  }
+} */
+@media (max-width: 800px) {
+  .post {
+    flex-direction: column; /* Stack items vertically */
+    max-width: 100%; /* Full width for small screens */
+    margin: 1rem; /* Reduce margins for smaller screens */
+  }
+
+  .post .image {
+    width: 100%; /* Image takes full width */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0; /* Remove left margin */
+  }
+
+  .post .texts {
+    width: 100%; /* Allow text area to take full width */
+    margin: 1rem 0; /* Margin to separate from image */
+  }
+
+  .post .texts h2 {
+    font-size: 1.8rem; /* Larger title on small screens */
+  }
+
+  .post .info {
+    flex-direction: column; /* Stack info items vertically */
+    gap: 5px; /* Space between stacked items */
+  }
+
+  .post .summary {
+    margin: 1rem 0; /* Additional margin for better spacing */
+  }
+
+  .post p {
+    flex-direction: row; /* Stack paragraph content vertically */
+    align-items: flex-start; /* Align items to the left */
+  }
+}
+/* Login/Register */
+form{
+  margin: 2rem 15rem ;
+}
+form.login, form.register{
+  max-width: 400px;
+  margin: 0 auto;
+}
+input,textarea,select{
+  display: block;
+  margin-bottom: 1rem;
+  width: 100%;
+  padding: 5px 5px;
+  border: 2px solid #cecccc;
+  border-radius: 5px;
+  background-color: #fff;
+  height: 2.5rem;
+}
+.form-date{
+  display: flex;
+  align-items: center;
+  width:10rem;
+  gap: 2rem;
+}
+.form-date input,select{
+  margin-right: 1rem;
+  margin-top: 1rem;
+  height: 2.5rem;
+  width: auto;
+}
+button{
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  background-color: #1c4936;
+  border:0;
+  color: #fff;
+  border-radius: 5px;
+  padding: 7px 0;
+  margin-bottom: 1rem;
+}
+form.login h1, form.register h1{
+  text-align: center;
+}
+@media (max-width: 900px) {
+  form{
+    margin: 2rem 5rem;
+  }
+}
+.post-page{
+  margin: 5rem 15rem;
+  align-items: center;
+  justify-content: center;
+}
+.post-page .image{
+  padding: 0 5rem;
+  display: flex;
+}
+div.post-page h1{
+  text-align: center;
+  margin: 10px;
+  padding-left: 2rem;
+}
+.post-page .author{
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.post-page .display{
+  margin-left: 2rem;
+}
+.post-page .postchange{
+  display: flex ;
+  align-items: center ;
+  justify-content: space-around;
+  /* margin-left: 16rem;
+  width: 60%; */
+  gap: 5rem;
+}
+.post-page .postchange button{
+  width: 10rem !important;
+  font-size: medium;
+}
+@media (max-width: 1100px) {
+  .post-page {
+    margin: 1rem; 
+    /* Adjust margin for smaller screens */
+  }
+
+  .post-page .image {
+    width: 100%; /* Full width for the image */
+    height: auto; /* Adjust height automatically */
+    margin-left: 0; /* Remove left margin */
+  }
+
+  .post-page .author {
+    font-size: 1.2rem; /* Slightly smaller font size for the author */
+  }
+
+  .post-page .display {
+    margin-left: 0; /* Remove left margin */
+  }
+
+  .post-page .postchange {
+    margin-left: 1rem; 
+    display: flex ;
+    align-items: center ;
+    justify-content: space-between;
+    width: 90%;
+    gap: 1rem;
+  }
+
+  .post-page .postchange button {
+    /* Make buttons wider on small screens */
+    margin-left: 0; /* Remove left margin */
+
+  }
+}
+.main-content{
+  display: flex;
+  height: 100%;
+}
+.filters{
+  width: 20%;
+  padding: 1rem;
+  background-color: rgb(244, 249, 221);
+}
+.filter-category{
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+/* Media query for screen sizes below 1100px */
+@media (max-width: 1150px) {
+  .main-content {
+    display: block;
+  }
+
+  .filters {
+    width: 100%;
+  }
+  .filter-category{
+    margin: 0;
+    height: 2.6rem;
+  }
+}
+.details{
+  padding-bottom: 1.5rem;
+  margin-left: 1rem;
+}
+.like-section{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+.like-section button{
+  align-items: start;
+  justify-content: start;
+  width: 50%;
+}
