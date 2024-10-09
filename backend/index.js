@@ -14,7 +14,8 @@ if(process.env.NODE_ENV !="production"){
 const UserRouter=require("./routes/UserRoute.js");
 const PostRouter=require("./routes/PostRoute.js");
 
-app.use(cors({credentials:true,origin:'http://localhost:5173'}));
+// http://localhost:5173
+app.use(cors({credentials:true,origin:'https://xploreindia.onrender.com'}));
 app.use(express.json());
 app.use(cookieParser());
 
