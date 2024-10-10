@@ -11,7 +11,7 @@ export default function Header({ setSearchTerm }) {
   const {setUserInfo,userInfo} = useContext(UserContext);
   useEffect(() => {
     fetch(`${url}/profile`, {
-      credentials: 'include',
+      credentials: 'include'
     }).then(response => {
       response.json().then(userInfo => {
         setUserInfo({
@@ -30,6 +30,7 @@ export default function Header({ setSearchTerm }) {
     fetch(`${url}/logout`, {
       credentials: 'include',
       method: 'POST',
+      headers: {'Content-Type':'application/json'}
     });
     setUserInfo(null);
   }

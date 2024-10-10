@@ -42,6 +42,7 @@ export default function PostPage() {
     const response = await fetch(`${url}/post/${id}`, {
       method: "DELETE",
       credentials: "include",
+      headers: {'Content-Type':'application/json'}
     });
 
     if (response.ok) {
@@ -56,6 +57,7 @@ export default function PostPage() {
     const response = await fetch(`${url}/post/${id}/like`, {
       method: "POST",
       credentials: "include",
+
     });
 
     if (response.ok) {

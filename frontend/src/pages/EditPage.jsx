@@ -48,6 +48,7 @@ export default function EditPage() {
       method: 'PUT',
       body: data,
       credentials: 'include',
+      headers: {'Content-Type':'application/json'}
     });
     if (response.ok) {
       setRedirect(true);
