@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
-
+import * as React from 'react';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
