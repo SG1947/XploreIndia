@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
-const { verifyToken, isUserAuthor } = require("./utils.js");
+
 module.exports.createPost=async (req,res) => {
     const {path,filename} = req.file;
     const {token} = req.cookies;

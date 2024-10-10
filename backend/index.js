@@ -13,9 +13,13 @@ if(process.env.NODE_ENV !="production"){
 
 const UserRouter=require("./routes/UserRoute.js");
 const PostRouter=require("./routes/PostRoute.js");
-
 // http://localhost:5173
-app.use(cors({credentials:true,origin:'https://xploreindia.onrender.com'}));
+
+app.use(cors({
+    credentials:true,
+    origin:'https://xploreindia.onrender.com',
+    methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -34,7 +38,7 @@ async function main(){
 
 app.use("/",UserRouter);
 app.use("/post",PostRouter);
-
-app.listen(8000,(req,res)=>{
-   console.log("Listening to port 8000")
+const PORT = process.env.PORT || 8000;
+app.listen(PORT,(req,res)=>{
+   console.log(`Listening to port ${PORT}`)
 });
