@@ -1,8 +1,13 @@
 import {useEffect, useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
+
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 const url=import.meta.env.VITE_SERVER_URL;
 export default function EditPage() {
   const {id} = useParams();
+  const [value, setValue] = React.useState(0);
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [files, setFiles] = useState(null);
@@ -40,6 +45,7 @@ export default function EditPage() {
     data.set("toDate", toDate);
     data.set("travelType", travelType);
     data.set("tripHighlight", tripHighlight);
+    data.set("rating",value);
     data.set('id', id);
     if (files?.[0]) {
       data.set('file', files?.[0]);
@@ -48,7 +54,6 @@ export default function EditPage() {
       method: 'PUT',
       body: data,
       credentials: 'include',
-      headers: {'Content-Type':'application/json'}
     });
     if (response.ok) {
       setRedirect(true);
@@ -157,7 +162,16 @@ export default function EditPage() {
           required
         />
       </label>
-
+      <Box sx={{ '& > legend': { mt: 2 } }}>
+      <Typography component="legend">Rate your experience </Typography>
+      <Rating
+        name="simple-controlled"
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+      />
+    </Box>
       
       <button style={{marginTop:'5px'}}>Update post</button>
     </form>
