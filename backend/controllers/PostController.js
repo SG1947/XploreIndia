@@ -8,23 +8,55 @@ const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const salt = bcrypt.genSaltSync(10);
 
-module.exports.createPost=async (req,res) => {
-    const {path,filename} = req.file;
-    const {token} = req.cookies;
-    jwt.verify(token, secret, {}, async (err,info) => {
-      if (err) throw err;
-      const {title,summary,state,destination,fromDate,toDate,travelType,tripHighlight,rating} = req.body;
+module.exports.createPost = async (req, res) => {
+  try {
+    // Ensure req.file exists before destructuring
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+
+    const { path, filename } = req.file;
+    const { token } = req.cookies;
+
+    // Verify the JWT token
+    jwt.verify(token, secret, {}, async (err, info) => {
+      if (err) {
+        console.log('Token verification failed:', err.message); // Log error details
+        return res.status(401).json({ message: 'Token expired or invalid' }); // Return error response
+      }
+
+      // Extract fields from the request body
+      const { title, summary, state, destination, fromDate, toDate, travelType, tripHighlight, rating } = req.body;
+
+      // Check if required fields are present
+      if (!title || !summary || !state || !destination) {
+        return res.status(400).json({ message: 'Missing required fields' });
+      }
+
+      // Create the post document
       const postDoc = await Post.create({
         title,
         summary,
-        cover:{path,filename},
-        author:info.id,
-        state,destination,fromDate,toDate,travelType,tripHighlight,rating
+        cover: { path, filename },
+        author: info.id,
+        state,
+        destination,
+        fromDate,
+        toDate,
+        travelType,
+        tripHighlight,
+        rating
       });
-      res.json(postDoc);
-    });
 
+      console.log('Post created successfully:', postDoc);
+      res.status(201).json(postDoc); // Respond with 201 Created status
+    });
+  } catch (error) {
+    console.error('Error creating post:', error.message); // Log the error
+    res.status(500).json({ message: 'Internal Server Error' }); // Respond with a generic error message
   }
+};
+
 module.exports.editPost=async (req,res) => {
     // console.log(req.file);
     let newimg = null;

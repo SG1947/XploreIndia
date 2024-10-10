@@ -50,8 +50,19 @@ module.exports.login = async (req, res) => {
 
 module.exports.profile = (req, res) => {
   const { token } = req.cookies;
+
+  // Check if the token exists
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized: No token provided' });
+  }
+
+  // Verify the token
   jwt.verify(token, secret, {}, (err, info) => {
-    if (err) throw err;
+    if (err) {
+      // Respond with an appropriate error message
+      return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+    }
+    // Send back user information if verification succeeds
     res.json(info);
   });
 };
