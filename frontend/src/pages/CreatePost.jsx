@@ -99,7 +99,7 @@ export default function CreatePost() {
           Destination
           <input
             type="text" // Changed to text for destination
-            placeholder="Jhargram"
+            placeholder="Kolkata"
             value={destination}
             onChange={(ev) => setDestination(ev.target.value)}
             required
