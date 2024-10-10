@@ -31,17 +31,44 @@ export default function CreatePost() {
     data.set("travelType", travelType);
     data.set("tripHighlight", tripHighlight);
     data.set("rating",value);
+  //   const response = await fetch(`${url}/post`, {
+  //     method: "POST",
+  //     body: data,
+  //     credentials: "include",
+  //   });
+  //   console.log(response);
+  //   if (response.ok) {
+  //     setRedirect(true);
+  //   }
+  //   else {
+  //     // If the response is not ok, handle the error
+  //     const errorData = await response.json(); // Parse the error response
+  //     alert(`Error ${response.status}: ${errorData.message || 'An error occurred'}`); // Display error message
+  //   }
+  // }
+  try {
+    // Send a POST request to create a new post
     const response = await fetch(`${url}/post`, {
       method: "POST",
       body: data,
       credentials: "include",
-      headers: {'Content-Type':'application/json'}
+      // Remove Content-Type header, as it will be set automatically for FormData
     });
+    console.log(response);
     if (response.ok) {
+      // If the request was successful, redirect the user
       setRedirect(true);
+    } else {
+      // If the response is not ok, handle the error
+      const errorData = await response.json(); // Parse the error response
+      alert(`Error ${response.status}: ${errorData.message || 'An error occurred'}`); // Display error message
     }
+  } catch (error) {
+    // Handle any network errors or unexpected errors
+    console.error("Error creating post:", error);
+    alert("Failed to create post: " + error.message);
   }
-
+}
   if (redirect) {
     return <Navigate to="/" />;
   }
