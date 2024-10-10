@@ -32,7 +32,12 @@ module.exports.login = async (req, res) => {
     // logged in
     jwt.sign({ username, id: userDoc._id}, secret, { expiresIn: '1h' }, (err, token) => {
       if (err) throw err;
-      res.cookie("token", token,{maxAge: 3600000})
+      res.cookie("token", token, {
+        maxAge: 3600000,   // 1 hour
+        httpOnly: true,    // Ensures the cookie is only accessible via HTTP (not JavaScript)
+        secure: true,      // Cookie is sent only over HTTPS (this must be `true` in production)
+        sameSite: 'None'   // Required for cross-origin requests (for allowing credentials)
+      })
       .json({
         id: userDoc._id,
         username
