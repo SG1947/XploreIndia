@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 import { Button, IconButton } from "@mui/material"; // Assuming you're using MUI for styling
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const url=import.meta.env.VITE_SERVER_URL;
 export default function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
@@ -24,7 +26,7 @@ export default function PostPage() {
         return response.json();
       })
       .then((postInfo) => {
-        console.log(postInfo.likes.likedBy);
+        // console.log(postInfo.likes.likedBy);
         setPostInfo(postInfo);
       })
       .catch((err) => {
@@ -46,9 +48,18 @@ export default function PostPage() {
     });
 
     if (response.ok) {
-      setRedirect(true); // Set redirect to true if the deletion is successful
+      toast.success('Edit success!', {
+        position: "top-center"
+      
+      });
+      setTimeout(() => {
+        setRedirect(true);
+      }, 3000);
     } else {
       const errorMessage = await response.json();
+      toast.error('Failed to delete', {
+        position: 'top-center',
+      });
       console.error("Failed to delete post:", errorMessage);
     }
   }
@@ -61,10 +72,16 @@ export default function PostPage() {
     });
 
     if (response.ok) {
+      toast.success('Thanks for liking!', {
+        position: 'top-center',
+      });
       const updatedPost = await response.json();
-      setPostInfo(updatedPost); // Update post info to reflect new like count
+      setPostInfo(updatedPost); 
     } else {
       const errorMessage = await response.json();
+      toast.error('Failed to like blog', {
+        position: 'top-center',
+      });
       console.error("Failed to like post:", errorMessage);
     }
   }
@@ -103,10 +120,10 @@ export default function PostPage() {
       </p>
       <p className="details">
         <strong>From:</strong>{" "}
-        {new Date(postInfo.fromDate).toLocaleDateString()}
+        {postInfo.fromDate.split('T')[0]}
       </p>
       <p className="details">
-        <strong>To:</strong> {new Date(postInfo.toDate).toLocaleDateString()}
+        <strong>To:</strong> {postInfo.toDate.split('T')[0]}
       </p>
       <p className="details">
         <strong>Travel Type:</strong> {postInfo.travelType}
@@ -136,6 +153,7 @@ export default function PostPage() {
             )}
           </IconButton>
       )}
+      <ToastContainer/>
     </div>
   );
 }

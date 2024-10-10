@@ -59,6 +59,7 @@ module.exports.createPost = async (req, res) => {
 
 module.exports.editPost=async (req,res) => {
     // console.log(req.file);
+
     let newimg = null;
     if(req.file){
       const {path,filename} = req.file;

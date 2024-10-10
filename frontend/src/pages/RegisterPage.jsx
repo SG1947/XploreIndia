@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { Link } from "react-router-dom";
+import {Navigate,Link} from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 const url=import.meta.env.VITE_SERVER_URL;
@@ -7,6 +7,7 @@ export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [redirect,setRedirect] = useState(false);
   async function register(ev) {
     ev.preventDefault();
     const response = await fetch(`${url}/register`, {
@@ -15,14 +16,21 @@ export default function RegisterPage() {
       headers: {'Content-Type':'application/json'},
     });
     if (response.status === 200) {
-      toast.success('Registration successful! Now you can log in', {
+      toast.success('Registration successful! Please log in', {
         position: "top-center"
+      
       });
+      setTimeout(() => {
+        setRedirect(true);
+      }, 3000);
     } else {
       toast.error('Registration failed. Please try again later', {
         position: 'top-center',
       }); 
     }
+  }
+  if (redirect) {
+    return <Navigate to={'/login'} />
   }
   return (
     <form className="register" onSubmit={register}>

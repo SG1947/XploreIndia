@@ -4,6 +4,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const url=import.meta.env.VITE_SERVER_URL;
 export default function CreatePost() {
   const [value, setValue] = React.useState(0);
@@ -31,42 +33,35 @@ export default function CreatePost() {
     data.set("travelType", travelType);
     data.set("tripHighlight", tripHighlight);
     data.set("rating",value);
-  //   const response = await fetch(`${url}/post`, {
-  //     method: "POST",
-  //     body: data,
-  //     credentials: "include",
-  //   });
-  //   console.log(response);
-  //   if (response.ok) {
-  //     setRedirect(true);
-  //   }
-  //   else {
-  //     // If the response is not ok, handle the error
-  //     const errorData = await response.json(); // Parse the error response
-  //     alert(`Error ${response.status}: ${errorData.message || 'An error occurred'}`); // Display error message
-  //   }
-  // }
   try {
-    // Send a POST request to create a new post
     const response = await fetch(`${url}/post`, {
       method: "POST",
       body: data,
       credentials: "include",
-      // Remove Content-Type header, as it will be set automatically for FormData
     });
     console.log(response);
     if (response.ok) {
-      // If the request was successful, redirect the user
-      setRedirect(true);
+      toast.success('New blog created!', {
+        position: "top-center"
+      
+      });
+      setTimeout(() => {
+        setRedirect(true);
+      }, 2000);
     } else {
-      // If the response is not ok, handle the error
-      const errorData = await response.json(); // Parse the error response
-      alert(`Error ${response.status}: ${errorData.message || 'An error occurred'}`); // Display error message
+      
+      const errorData = await response.json();
+      console.log(errorData) ;// Parse the error response
+      toast.warning("An error occurred", {
+        position: 'top-center',
+      });
     }
   } catch (error) {
-    // Handle any network errors or unexpected errors
     console.error("Error creating post:", error);
-    alert("Failed to create post: " + error.message);
+    toast.error("Failed to create post: " + error.message, {
+      position: 'top-center',
+    });
+    
   }
 }
   if (redirect) {
@@ -80,7 +75,7 @@ export default function CreatePost() {
       <label>
         Title
         <input
-          type="text" // Corrected type
+          type="text" 
           placeholder="Title"
           value={title}
           onChange={(ev) => setTitle(ev.target.value)}
@@ -133,18 +128,18 @@ export default function CreatePost() {
           From:
           <input
             type="date"
-            value={fromDate}
-            onChange={(ev) => setFromDate(ev.target.value)}
+            value={fromDate.split('T')[0]}
+            onChange={(ev) => setFromDate(ev.target.value.split('T')[0])}
             required
           />
         </label>
-
         <label>
           To:
           <input
             type="date"
-            value={toDate}
-            onChange={(ev) => setToDate(ev.target.value)}
+            value={toDate.split('T')[0]}
+            min={fromDate.split('T')[0]}
+            onChange={(ev) => setToDate(ev.target.value.split('T')[0])}
             required
           />
         </label>
@@ -159,7 +154,6 @@ export default function CreatePost() {
             <option value="solo">Solo</option>
             <option value="family">Family</option>
             <option value="friends">Friends</option>
-            <option value="couple">Couple</option>
             <option value="business">Business</option>
           </select>
         </label>
@@ -170,7 +164,6 @@ export default function CreatePost() {
         <textarea
           value={tripHighlight}
           onChange={(ev) => setTripHighlight(ev.target.value)}
-          required
         />
       </label>
       <Box sx={{ '& > legend': { mt: 2 } }}>
@@ -184,6 +177,7 @@ export default function CreatePost() {
       />
     </Box>
       <button style={{ marginTop: "5px" }}>Create Post</button>
+      <ToastContainer/>
     </form>
   );
 }

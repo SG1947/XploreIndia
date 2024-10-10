@@ -1,5 +1,7 @@
 import {useContext, useState} from "react";
-import {Navigate} from "react-router-dom";
+import {Link,Navigate} from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {UserContext} from "../components/UserContext.jsx";
 const url=import.meta.env.VITE_SERVER_URL;
 export default function LoginPage() {
@@ -21,10 +23,18 @@ export default function LoginPage() {
           ...userInfo,
           isAuthenticated: true
         });
-        setRedirect(true);
+        toast.success('Welcome to XploreIndia', {
+          position: "top-center"
+        
+        });
+        setTimeout(() => {
+          setRedirect(true);
+        }, 2000);
       });
     } else {
-      alert('wrong credentials');
+      toast.error('Failed to log in', {
+        position: 'top-center',
+      }); 
     }
   }
 
@@ -43,6 +53,8 @@ export default function LoginPage() {
              value={password}
              onChange={ev => setPassword(ev.target.value)}/>
       <button>Login</button>
+      <ToastContainer />
+      First time user?<span><Link to={'/register'}>Register</Link></span>
     </form>
   );
 }

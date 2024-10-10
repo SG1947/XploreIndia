@@ -7,7 +7,7 @@ export default function Layout() {
   return (
     <main>
       <Header setSearchTerm={setSearchTerm} />
-      <Outlet context={{ searchTerm }} />
+      <Outlet context={{ setSearchTerm,searchTerm }} />
     </main>
   );
 }
