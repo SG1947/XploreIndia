@@ -380,10 +380,15 @@ div.post-page h1{
 
   .filters {
     width: 100%;
+    justify-content: space-between;
+    align-items: center;
   }
   .filter-category{
-    margin: 0;
+    margin-right: 1rem;
     height: 2.6rem;
+  }
+  .filter-category select{
+    width: 50%;
   }
 }
 .details{
