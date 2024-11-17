@@ -154,7 +154,7 @@ export default function PostPage() {
           )}
         </IconButton>
       )}
-      <div class="cta-section">
+      {/* <div class="cta-section">
       {userInfo.id !== postInfo.author._id &&(
         <>
         <h3>Want the Full Itinerary?</h3>
@@ -164,7 +164,7 @@ export default function PostPage() {
       )}
   
   
-</div>
+</div> */}
       <ToastContainer />
     </div>
   );
