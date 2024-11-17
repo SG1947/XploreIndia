@@ -6,6 +6,9 @@ import { UserContext } from "../components/UserContext.jsx";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 const url = import.meta.env.VITE_SERVER_URL;
 export default function Header({ setSearchTerm }) {
   const { setUserInfo, userInfo } = useContext(UserContext);
@@ -23,8 +26,16 @@ export default function Header({ setSearchTerm }) {
       });
     });
   }, []);
+  const scrollToPosts = () => {
+    const postsSection =document.querySelector(".main-content"); ;
+    console.log(postsSection);
+    if (postsSection) {
+        postsSection.scrollIntoView();
+    }
+  };
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+    scrollToPosts();
   };
 
   function logout() {
@@ -51,14 +62,15 @@ export default function Header({ setSearchTerm }) {
       <Link to="/" className="logo">
         XploreIndia
       </Link>
-      <div className="search">
-        <input
-          type="text"
-          placeholder="&nbsp;Enter destination to search......"
-          onChange={handleSearchChange}
-        />
-        <button>Search</button>
-      </div>
+      <div className="search-container">
+      <SearchIcon className="search-icon" />
+      <input
+        type="text"
+        placeholder="Enter destination to search..."
+        onChange={handleSearchChange}
+        className="search-input"
+      />
+    </div>
       {username ? (
         <div>
           <Button

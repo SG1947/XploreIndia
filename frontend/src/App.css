@@ -21,6 +21,7 @@ main {
   /* Remove fixed height */
   min-height: 100vh; /* Allow main to grow with content */
   margin: 0 auto;
+  background-color:#ffffff;
 }
 .main-content{
   display: flex;
@@ -32,6 +33,28 @@ img{
   border-radius: 25px; 
   padding: 1rem;
 }
+.image1{  
+  width: 100%;  
+  padding: 0;      /* Ensures full-width responsiveness */
+  height: 500px;
+  border-radius: 0px;          /* Set a fixed height to crop the image */
+  object-fit: cover;/* Crops the image to fit the container */   /* Adds rounded corners */
+  overflow: hidden; 
+}
+.overlay-content {
+  position: absolute;
+  top: 30%;
+  left: 8%;
+  /* transform: translate(-50%, -50%); */
+  color: white;
+  text-align: center;
+  background-color: rgba(137, 76, 27, 0.271); /* Semi-transparent background */
+  padding: 20px;
+  border-radius: 8px;
+}
+.overlay-content h2{
+  font-size:3rem;
+}
 /* Header */
 
 header{
@@ -42,11 +65,12 @@ header{
   justify-content:space-between;
   align-items: center;
   z-index: 10;
-  background-color: rgb(213, 245, 234);
+  background-color:burlywood;
+  color: #673816;
 }
 header a{
   text-decoration:none;
-  color: inherit;
+  color:  #673816;
 }
 header a.logo{
   font-weight: bold;
@@ -63,17 +87,34 @@ header .menu{
   display: none !important;
 }
 .search{
-  display: flex;
+  display: inline;;
   width:50%;
-  justify-content: space-between;
   margin-top: 20px;
 }
-.search input{
-  margin-left: 2rem;
-  width: 60%;
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid  #673816;
+  border-radius: 25px;
+  max-height: 50px;
+  width: 500px;
+  margin: 10px;
+  margin-left: 100px;
+  background-color: white;
 }
-.search button{
-  width: 40%;
+
+.search-icon {
+  color: #888;
+  margin:1rem;/* Adjust this to change spacing */
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  overflow: hidden;
+  margin: 10px;
+  flex: 1;
 }
 /* Media query for screen sizes below 1100px */
 @media (max-width: 900px) {
@@ -99,14 +140,30 @@ header .menu{
   .search {
     align-items: center;
   }
-
-  .search input {
-    padding-right: 1rem;
-    margin-right: 0;
-    margin-bottom: 1rem;
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid  #673816;
+    border-radius: 25px;
+    max-height: 50px;
+    width: 500px;
+    margin: 10px;
+    margin-left: 10px;
+    background-color: white;
   }
-  .search button{
-    display: none;
+  
+  .search-icon {
+    color: #888;
+    margin:0.5rem;/* Adjust this to change spacing */
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    overflow: hidden;
+    margin: 10px;
+    flex: 1;
   }
 }
 /* Index */
@@ -115,9 +172,10 @@ header .menu{
   max-width: 50rem;
   display:flex;
   margin: 2rem 10rem;
-  background-color: rgb(250, 245, 226) !important;
+  background-color: rgb(252, 252, 249) !important;
   border-radius: 15px !important;
-  border: 1px solid burlywood;
+  background-color: rgba(245, 233, 216, 0.634) !important;
+  border: 2px solid burlywood;
 }
 .post .image{
   width: 50%;
@@ -130,7 +188,10 @@ header .menu{
 }
 .post .texts h2{
   font-size: 1.5rem;
+  text-decoration: none !important;
+  color: inherit;
 }
+
 .post .info{
   margin:24px 0;
   color: #888;
@@ -221,7 +282,8 @@ header .menu{
 }
 /* Login/Register */
 form{
-  margin: 2rem 15rem !important;
+  margin: 3.5rem 35rem !important;
+  
 }
 form.login, form.register{
   max-width: 400px;
@@ -253,7 +315,7 @@ button{
   cursor: pointer;
   width: 100%;
   display: block;
-  background-color: #1c4936;
+  background-color: rgb(136, 81, 10);
   border:0;
   color: #fff;
   border-radius: 5px;
@@ -364,8 +426,13 @@ div.post-page h1{
 
 .filters{
   width: 20%;
-  padding: 1rem;
-  background-color: rgb(244, 249, 221);
+  padding: 1.5rem;
+  background-color: rgba(245, 233, 216, 0.634);
+}
+.filters h3{
+  font-size: 1.3rem;
+  font-style:;
+  
 }
 .filter-category{
   display: flex;

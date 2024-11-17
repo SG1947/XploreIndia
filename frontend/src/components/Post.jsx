@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Typography from "@mui/material/Typography";
+import { Button } from "@mui/material";
 export default function Post({
   _id,
   title,
@@ -22,9 +23,8 @@ export default function Post({
           <CardContent sx={{ flex: "1 0 auto" }}>
             <Typography component="div" variant="h5">
               <div className="texts">
-                <Link to={`/post/${_id}`}>
                   <h2>{title}</h2>
-                </Link>
+                
               </div>
             </Typography>
             <Typography
@@ -47,12 +47,17 @@ export default function Post({
                   <strong>Total Likes:</strong> {likes?.count || 0}
                   <FavoriteIcon className="like-icon" />
                 </p>
+                <Link to={`/post/${_id}`} style={{ textDecoration: 'none' }}>
+                <button>Read More</button>
+                </Link>
               </div>
             </Typography>
           </CardContent>
         </Box>
         <CardMedia component="img" className="image" image={cover.path} />
+        
       </Card>
+      
     </div>
   );
 }

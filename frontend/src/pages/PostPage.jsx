@@ -6,10 +6,10 @@ import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import { Button, IconButton } from "@mui/material"; // Assuming you're using MUI for styling
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-const url=import.meta.env.VITE_SERVER_URL;
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const url = import.meta.env.VITE_SERVER_URL;
 export default function PostPage() {
   const [postInfo, setPostInfo] = useState(null);
   const [redirect, setRedirect] = useState(false);
@@ -44,21 +44,20 @@ export default function PostPage() {
     const response = await fetch(`${url}/post/${id}`, {
       method: "DELETE",
       credentials: "include",
-      headers: {'Content-Type':'application/json'}
+      headers: { "Content-Type": "application/json" },
     });
 
     if (response.ok) {
-      toast.success('Edit success!', {
-        position: "top-center"
-      
+      toast.success("Edit success!", {
+        position: "top-center",
       });
       setTimeout(() => {
         setRedirect(true);
       }, 3000);
     } else {
       const errorMessage = await response.json();
-      toast.error('Failed to delete', {
-        position: 'top-center',
+      toast.error("Failed to delete", {
+        position: "top-center",
       });
       console.error("Failed to delete post:", errorMessage);
     }
@@ -68,21 +67,20 @@ export default function PostPage() {
     const response = await fetch(`${url}/post/${id}/like`, {
       method: "POST",
       credentials: "include",
-
     });
 
     if (response.ok) {
-      toast.success('Thanks for liking!', {
-        position: 'top-center',
+      toast.success("Thanks for liking!", {
+        position: "top-center",
       });
       const updatedPost = await response.json();
-      setPostInfo(updatedPost); 
+      setPostInfo(updatedPost);
     } else {
       const errorMessage = await response.json();
-      toast.error('Failed to like blog', {
-        position: 'top-center',
+      toast.error("Please login to like the post!", {
+        position: "top-center",
       });
-      console.error("Failed to like post:", errorMessage);
+      console.error("Please login to like the post:", errorMessage);
     }
   }
   const tripHighlights = postInfo.tripHighlight
@@ -109,7 +107,9 @@ export default function PostPage() {
 
       <div className="details">{postInfo.summary}</div>
       <Box className="details">
-        <Typography component="legend"><strong>Rating</strong></Typography>
+        <Typography component="legend">
+          <strong>Rating</strong>
+        </Typography>
         <Rating name="read-only" value={postInfo.rating} readOnly />
       </Box>
       <p className="details">
@@ -119,11 +119,10 @@ export default function PostPage() {
         <strong>Destination:</strong> {postInfo.destination}
       </p>
       <p className="details">
-        <strong>From:</strong>{" "}
-        {postInfo.fromDate.split('T')[0]}
+        <strong>From:</strong> {postInfo.fromDate.split("T")[0]}
       </p>
       <p className="details">
-        <strong>To:</strong> {postInfo.toDate.split('T')[0]}
+        <strong>To:</strong> {postInfo.toDate.split("T")[0]}
       </p>
       <p className="details">
         <strong>Travel Type:</strong> {postInfo.travelType}
@@ -138,22 +137,35 @@ export default function PostPage() {
       </p>
 
       {userInfo.id !== postInfo.author._id && (
-        
-          <IconButton onClick={handleLike} className="like-section" >
-            {postInfo.likes?.likedBy?.includes(userInfo.id) ? (
-              <>
-                <FavoriteIcon style={{ color: "red" }} />
-                <span style={{color:"black"}}>You have already liked this!</span>
-              </>
-            ) : (
-              <>
-                <FavoriteBorderOutlinedIcon />&nbsp;&nbsp;&nbsp;
-                <span style={{color:"black"}}>Please like this post</span>
-              </>
-            )}
-          </IconButton>
+        <IconButton onClick={handleLike} className="like-section">
+          {postInfo.likes?.likedBy?.includes(userInfo.id) ? (
+            <>
+              <FavoriteIcon style={{ color: "red" }} />
+              <span style={{ color: "black" }}>
+                You have already liked this!
+              </span>
+            </>
+          ) : (
+            <>
+              <FavoriteBorderOutlinedIcon />
+              &nbsp;&nbsp;&nbsp;
+              <span style={{ color: "black" }}>Please like this post</span>
+            </>
+          )}
+        </IconButton>
       )}
-      <ToastContainer/>
+      <div class="cta-section">
+      {userInfo.id !== postInfo.author._id &&(
+        <>
+        <h3>Want the Full Itinerary?</h3>
+        <p>Login to receive the complete day-by-day itinerary of the trip!</p>
+        </>
+        
+      )}
+  
+  
+</div>
+      <ToastContainer />
     </div>
   );
 }
