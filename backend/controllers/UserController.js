@@ -70,7 +70,9 @@ module.exports.logout = (req, res) => {
   res.cookie("token", "", {
     httpOnly: true,
     expires: new Date(0), // Expire the cookie immediately
-    path: "/", // Ensure the path matches where it was set// Only set `secure` in production
+    path: "/", 
+    secure: true,      // Cookie is sent only over HTTPS (this must be `true` in production)
+    sameSite: 'None'// Ensure the path matches where it was set// Only set `secure` in production
   });
   res.json("ok");
 };
