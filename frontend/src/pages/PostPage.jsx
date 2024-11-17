@@ -154,17 +154,7 @@ export default function PostPage() {
           )}
         </IconButton>
       )}
-      {/* <div class="cta-section">
-      {userInfo.id !== postInfo.author._id &&(
-        <>
-        <h3>Want the Full Itinerary?</h3>
-        <p>Login to receive the complete day-by-day itinerary of the trip!</p>
-        </>
-        
-      )}
-  
-  
-</div> */}
+      
       <ToastContainer />
     </div>
   );
