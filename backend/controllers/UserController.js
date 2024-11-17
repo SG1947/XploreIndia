@@ -67,5 +67,11 @@ module.exports.profile = (req, res) => {
   });
 };
 module.exports.logout = (req, res) => {
-  res.cookie("token", "").json("ok");
+  res.cookie("token", "", {
+    httpOnly: true,
+    expires: new Date(0), // Expire the cookie immediately
+    path: "/", // Ensure the path matches where it was set// Only set `secure` in production
+  });
+  res.json("ok");
 };
+
