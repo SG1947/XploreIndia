@@ -13,7 +13,7 @@ if(process.env.NODE_ENV !="production"){
 
 const UserRouter=require("./routes/UserRoute.js");
 const PostRouter=require("./routes/PostRoute.js");
-// http://localhost:5173
+//http://localhost:5173 
 
 app.use(cors({
     credentials:true,

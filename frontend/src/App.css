@@ -6,6 +6,7 @@
 }
 a{
   cursor: pointer;
+  text-decoration: none;
 }
 html, body {
   color: #222;
@@ -51,6 +52,15 @@ img{
   background-color: rgba(137, 76, 27, 0.271); /* Semi-transparent background */
   padding: 20px;
   border-radius: 8px;
+}
+@media (max-width: 768px) {
+  .overlay-content {
+    top: 20%; /* Adjust position */
+    left: 5%; /* Reduce left margin */
+    width: 90%; /* Take up more width */
+    font-size: 14px; /* Smaller text for readability */
+    padding: 15px; /* Reduce padding */
+  }
 }
 .overlay-content h2{
   font-size:3rem;
@@ -137,6 +147,7 @@ header .menu{
   header .menu{
     display: flex !important;
   }
+
   .search {
     align-items: center;
   }
@@ -282,12 +293,13 @@ header .menu{
 }
 /* Login/Register */
 form{
-  margin: auto!important;
+  margin: 2rem!important;
   margin-top: 3rem !important;
 }
 form.login, form.register{
-  max-width: 400px;
-  margin: 0 auto;
+  align-items: center;
+  margin: 5% 15% !important;
+  padding: 0 2rem !important ;
 }
 input,textarea,select{
   display: block;
@@ -298,6 +310,10 @@ input,textarea,select{
   border-radius: 5px;
   background-color: #fff;
   height: 2.5rem;
+}
+a{
+  color: #572b12;
+  font-weight: 700;
 }
 .form-date{
   display: flex;
@@ -327,7 +343,11 @@ button{
     height: auto; /* Adjust height for smaller screens */
     padding: 10px; /* More padding for easier touch interaction */
   }
-  
+  form.login, form.register{
+    padding: 0 !important;
+    margin: 2rem !important;
+  }
+
   .form-date {
     flex-wrap: wrap;
     width: 100%; /* Use full width */
@@ -384,6 +404,9 @@ div.post-page h1{
   width: 60%; */
   gap: 5rem;
 }
+.post-page .postchange a{
+  text-decoration: none;
+}
 .post-page .postchange button{
   width: 10rem !important;
   font-size: medium;
@@ -416,7 +439,9 @@ div.post-page h1{
     width: 90%;
     gap: 1rem;
   }
-
+  .post-page .postchange a{
+    text-decoration: none;
+  }
   .post-page .postchange button {
     /* Make buttons wider on small screens */
     margin-left: 0; /* Remove left margin */
@@ -472,3 +497,150 @@ div.post-page h1{
   justify-content: start;
   width: 50%;
 }
+
+/* General Styles */
+.account-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  margin: auto;
+}
+
+.profile-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+.profile-card-actions {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.edit-button {
+  background-color: #197530 !important;
+  color: white;
+  max-width: 7rem;
+  margin-left: 2px;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.delete-button {
+  background-color: #d96d24 !important;
+  color: white;
+  max-width: 7rem;
+}
+
+.delete-button:hover {
+  background-color: #7b5407;
+}
+
+.profile-card {
+  border: 2px solid #f6d44dd7;
+  padding: 15px;
+  margin-left: 10%;
+  border-radius: 8px;
+  background: #f8f6ee72;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.profile-item {
+  margin: 10px 0;
+}
+
+.social-links {
+  margin-top: 15px;
+}
+
+.social-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.social-list li {
+  margin-bottom: 10px;
+}
+
+.no-social-links,
+.no-user-data {
+  color: #777;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  width:90%;
+  margin-left: 5%;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #fcd5af !important;
+  color: #333;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active-tab {
+  background-color: #775e32!important;
+  color: white;
+}
+.tabs button.MuiButton-containedPrimary {
+  background-color:#b75c2b !important;
+  color: white;
+}
+
+.tabs button.MuiButton-containedPrimary:hover {
+  background-color:#9a4c23 !important;
+}
+.tab-button:hover {
+  background-color: #9a4c23 !important;
+  color: white;
+}
+
+/* Content Sections */
+.tab-content {
+  padding: 2px;
+  width: 90%;
+  margin-left: 5%;
+  border-radius: 8px;
+  border: 1px solid #d78a1d;
+}
+
+.blogs-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.blogs-list li {
+  margin-bottom: 15px;
+}
+
+.my-blogs-section,
+.liked-blogs-section {
+  padding: 0 5%;
+}
+.create-blog-button {
+  display: inline-block;
+  text-decoration: none;
+  margin-left: 15%;
+  background-color: rgb(152, 87, 37);
+  color: white;
+  padding: 10px 20px;
+  width: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+

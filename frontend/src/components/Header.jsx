@@ -110,6 +110,11 @@ export default function Header({ setSearchTerm }) {
                 <Link to="/create">Create new blog</Link>
               </>
             </MenuItem>
+            <MenuItem className="menu" onClick={handleClose}>
+              <>
+              <Link to="/account">Account</Link>
+              </>
+            </MenuItem>
             <MenuItem onClick={handleClose}>
               <a onClick={logout}>Logout ({username})</a>
             </MenuItem>
@@ -152,6 +157,7 @@ export default function Header({ setSearchTerm }) {
         {username ? (
           <>
             <Link to="/create">Create new blog</Link>
+            <Link to="/account">Account</Link>
             <a onClick={logout}>Logout ({username})</a>
           </>
         ) : (

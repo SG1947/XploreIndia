@@ -7,7 +7,7 @@ export function UserContextProvider({children}) {
     id: null,
     username: null,
     isAuthenticated: false 
-});;
+});
   return (
     <UserContext.Provider value={{userInfo,setUserInfo}}>
       {children}

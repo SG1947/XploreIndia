@@ -64,25 +64,50 @@ export default function PostPage() {
   }
 
   async function handleLike() {
-    const response = await fetch(`${url}/post/${id}/like`, {
-      method: "POST",
-      credentials: "include",
-    });
-
-    if (response.ok) {
-      toast.success("Thanks for liking!", {
-        position: "top-center",
-      });
-      const updatedPost = await response.json();
-      setPostInfo(updatedPost);
-    } else {
-      const errorMessage = await response.json();
+    // Check if the user is logged in
+    if (!userInfo || !userInfo.id) {
       toast.error("Please login to like the post!", {
         position: "top-center",
       });
-      console.error("Please login to like the post:", errorMessage);
+      return;
+    }
+  
+    // Check if the user has already liked the post
+    if (postInfo.likes?.likedBy?.includes(userInfo.id)) {
+      toast.info("You have already liked this post!", {
+        position: "top-center",
+      });
+      return;
+    }
+  
+    // Proceed to send the like request
+    try {
+      const response = await fetch(`${url}/post/${id}/like`, {
+        method: "POST",
+        credentials: "include",
+      });
+  
+      if (response.ok) {
+        toast.success("Thanks for liking!", {
+          position: "top-center",
+        });
+        const updatedPost = await response.json();
+        setPostInfo(updatedPost); // Update the post info with the server's response
+      } else {
+        const errorMessage = await response.json();
+        toast.error("An error occurred while liking the post!", {
+          position: "top-center",
+        });
+        console.error("Error liking the post:", errorMessage);
+      }
+    } catch (err) {
+      console.error("Network error while liking the post:", err);
+      toast.error("Network error occurred!", {
+        position: "top-center",
+      });
     }
   }
+  
   const tripHighlights = postInfo.tripHighlight
     ? postInfo.tripHighlight
         .split(/\n|\. /)
@@ -137,7 +162,7 @@ export default function PostPage() {
       </p>
 
       {userInfo.id !== postInfo.author._id && (
-        <IconButton onClick={handleLike} className="like-section">
+        <IconButton onClick={handleLike} className="like-section" disableRipple>
           {postInfo.likes?.likedBy?.includes(userInfo.id) ? (
             <>
               <FavoriteIcon style={{ color: "red" }} />
